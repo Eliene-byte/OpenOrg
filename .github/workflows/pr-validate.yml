@@ -1,0 +1,33 @@
+name: Validar contribuição (PR)
+on:
+  pull_request:
+    paths: ['files/**', 'data/index.json']
+permissions:
+  contents: read
+  pull-requests: write
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: { ref: ${{ github.event.pull_request.head.sha }} }
+      - name: Validar arquivos e catálogo
+        run: |
+          node -e "
+          const fs=require('fs'),path=require('path');
+          const ALLOWED='png,jpg,jpeg,gif,webp,avif,mp4,webm,mov,mp3,wav,ogg,m4a,pdf,txt,md,csv,xml,zip,tar,gz,7z,rar,epub,doc,docx,xls,xlsx,ppt,pptx,odt,ods,odp,pptx,mpg,mpeg,avi,mkv'.split(',');
+          const MAX=25*1048576, cat=JSON.parse(fs.readFileSync('data/index.json','utf8'));
+          if(!Array.isArray(cat)) throw new Error('index.json inválido');
+          for(const f of fs.readdirSync('files')){
+            const p=path.join('files',f), e=path.extname(f).slice(1).toLowerCase();
+            if(!ALLOWED.includes(e)) throw new Error('Extensão não permitida: '+f);
+            if(fs.statSync(p).size>MAX) throw new Error('Arquivo >25MB: '+f);
+          }
+          for(const it of cat){ if(it.path && !fs.existsSync(it.path)) throw new Error('Catálogo aponta arquivo inexistente: '+it.path); }
+          console.log('OK: '+cat.length+' itens, apenas paths permitidos');
+          "
+      - name: Comentar resultado
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.createComment({...context.repo, issue_number: context.payload.pull_request.number, body: '✅ Validação automática aprovada. Aguardando revisão do mantenedor para entrar no acervo.'});
