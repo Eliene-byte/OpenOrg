@@ -1,0 +1,7 @@
+Bem-vindo ao OpenOrg!
+
+Este e o seu arquivo digital, hospedado 100% no GitHub Pages.
+- Os arquivos ficam nesta pasta (/files) dentro do repositorio Eliene-byte/OpenOrg.
+- O catalogo fica em /data/index.json.
+- Para publicar: abra o site, clique em "Publicar arquivo", cole seu token PAT e envie.
+- Tudo e compilado/publicado pelo GitHub Actions. Nada e compilado no seu computador.

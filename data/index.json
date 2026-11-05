@@ -1,0 +1,15 @@
+[
+  {
+    "id": "bem-vindo",
+    "title": "Bem-vindo ao OpenOrg",
+    "author": "Eliene-byte",
+    "collection": "Geral",
+    "tags": ["boas-vindas", "guia"],
+    "desc": "Primeiro item do acervo. Clique em 'Publicar arquivo' e envie seus arquivos — eles vão direto para este repositório no GitHub.",
+    "path": "files/LEIA-ME.txt",
+    "size": 420,
+    "kind": "text",
+    "date": "2026-11-05T00:00:00.000Z",
+    "downloads": 0
+  }
+]

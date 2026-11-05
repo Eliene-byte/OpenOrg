@@ -1,0 +1,34 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>OpenOrg — Arquivo Digital</title><meta name="description" content="OpenOrg: acervo digital aberto de arquivos, mídia e documentos.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%230a0a0a'/><text x='16' y='22' font-size='18' text-anchor='middle' fill='%23f97316' font-family='monospace'>O</text></svg>">
+<link rel="stylesheet" href="style.css"></head><body>
+<header><div class="wrap nav"><a class="logo" href="#"><span>O</span>penOrg</a>
+<nav><a href="#biblioteca">Biblioteca</a><a href="#colecoes">Coleções</a><a href="#sobre">Sobre</a><button class="btn ghost" id="adminBtn">⬆ Publicar arquivo</button></nav></div></header>
+<section class="hero wrap"><p class="pill mono">● ACERVO ABERTO · GITHUB PAGES</p>
+<h1>Seu arquivo digital.<br><em>Sem servidor. Sem build local.</em></h1>
+<p class="lead">Publicado e hospedado 100% no GitHub. Busque, filtre, assista, leia e baixe arquivos — tudo no navegador.</p>
+<div class="search"><span>⌕</span><input id="q" placeholder="Buscar por título, autor, tag, tipo…  ( / )" autocomplete="off"><kbd>/</kbd></div>
+<div class="chips" id="chips"></div>
+<div class="stats" id="stats"></div></section>
+<main class="wrap">
+<section id="biblioteca"><div class="row"><h2>Biblioteca</h2><select id="sort"><option value="date">Mais recentes</option><option value="title">Título A–Z</option><option value="size">Maior arquivo</option><option value="downloads">Mais baixados</option></select></div>
+<div class="grid" id="grid"></div><p id="empty" class="empty" hidden>Nenhum arquivo encontrado. Ajuste a busca ou seja o primeiro a publicar.</p>
+<div id="moreWrap" class="center"><button class="btn" id="more">Carregar mais</button></div></section>
+<section id="colecoes"><h2>Coleções</h2><div class="grid cols" id="collections"></div></section>
+<section id="sobre" class="card"><h2>Sobre o OpenOrg</h2><p>Acervo estático e aberto: os arquivos vivem no repositório <code>Eliene-byte/OpenOrg</code> (pasta <code>/files</code>) e o catálogo em <code>/data/index.json</code>. O GitHub Pages publica tudo e o GitHub Actions valida/deploya a cada push — nada precisa ser compilado no seu computador.</p></section>
+</main>
+<footer><div class="wrap mono">OpenOrg · Feito para o GitHub Pages · <span id="year"></span></div></footer>
+
+<!-- Viewer -->
+<div class="modal" id="viewer" hidden><div class="sheet"><button class="x" data-close>✕</button><div id="vBody"></div></div></div>
+<!-- Admin / Upload -->
+<div class="modal" id="admin" hidden><div class="sheet"><button class="x" data-close>✕</button>
+<h3>Publicar arquivo</h3><p class="muted">Envia direto ao repositório via API do GitHub (arquivo → <code>/files</code>, catálogo → <code>/data/index.json</code>). Seu PAT fica só no seu navegador (<code>localStorage</code>), com permissão <code>repo</code>.</p>
+<label>Token GitHub (PAT)<input id="token" type="password" placeholder="ghp_…"></label>
+<div class="form2"><label>Título<input id="fTitle"></label><label>Autor<input id="fAuthor"></label>
+<label>Coleção<input id="fCol" placeholder="ex: Vídeos, Docs"></label><label>Tags (vírgula)<input id="fTags" placeholder="pdf, 2026"></label></div>
+<label>Descrição<textarea id="fDesc" rows="3"></textarea></label>
+<div class="drop" id="drop">Arraste arquivos aqui ou <u>clique para escolher</u><input id="files" type="file" multiple hidden></div>
+<div class="bar" hidden id="barWrap"><i id="bar"></i></div><p id="log" class="mono muted"></p>
+<button class="btn primary" id="publish">Publicar no GitHub →</button></div></div>
+<script src="app.js"></script></body></html>
