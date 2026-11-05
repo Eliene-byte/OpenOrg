@@ -17,8 +17,13 @@ Acervo estilo Archive.org, 100% estático e profissional (visual escuro estilo O
 3. No repositório: **Settings → Pages → Source: GitHub Actions**
 4. Acesse `https://eliene-byte.github.io/OpenOrg/`
 
-## Adicionar arquivos
-- **Pelo site:** botão "Publicar arquivo" → cole o PAT → arraste arquivos → Publicar. O site envia via API para `/files` e atualiza `/data/index.json` sozinho.
+## Login com GitHub (v2 — cada pessoa com a própria conta)
+Sem token compartilhado: o visitante clica **Entrar com GitHub** → Device Flow (digita um código em `github.com/login/device`) → o acesso fica só no navegador dele. Ao publicar, o site cria um **fork** na conta da pessoa, commita os arquivos numa branch e abre um **Pull Request** — o Actions valida (extensão, ≤25 MB, catálogo íntegro) e o mantenedor aprova.
+
+**Ativação (uma vez, 2 min):** GitHub → Settings → Developer settings → OAuth Apps → New OAuth App → marque **Enable Device Flow** → cole o **Client ID** em `config.js` (`oauthClientId`) → push. Sem client secret.
+
+## Adicionar arquivos (v2)
+- **Pelo site:** Entrar com GitHub → Publicar arquivo → arraste → envia via fork + PR da sua conta.
 - **Pelo GitHub:** arraste arquivos em `/files` (Upload files) e edite `/data/index.json` (ícone de lápis) — ou deixe o site fazer por você.
 
 ## Recursos
